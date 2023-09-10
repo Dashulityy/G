@@ -1,0 +1,32 @@
+.c-button{
+    //width: 151px;
+    padding: 11px 109px;
+    height: 44px;
+    border-radius: 5px;
+    background-color: #31AE54;
+    color: #FFF;
+    text-align: center;
+    font-family: Open Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.15px;
+    &:hover {
+        transition: .4s;
+    }
+    &.theme-grey {
+        background: #9E9E9E;
+  
+        &:hover {
+          background: #7c7c7c;
+        }
+    }
+    &.theme-green {
+        background: #31AE54;
+  
+        &:hover {
+          background: #208C32;
+        }
+    }
+}

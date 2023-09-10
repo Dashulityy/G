@@ -1,0 +1,17 @@
+.slider__items{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    margin-left: -188px;
+    transition: .4s;
+    transform: translateX(0)
+}
+.c-slider__container{
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.0001);
+    height: 100%;
+}
+.slide{
+    width: 375px;
+}

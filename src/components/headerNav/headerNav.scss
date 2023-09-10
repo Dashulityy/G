@@ -1,0 +1,24 @@
+.c-header-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.icon {
+    &-button {
+        width: 32px;
+        margin-right: 16px;
+        &:last-child {
+            margin-right: 0;
+            svg{
+                width: 32px;
+            }
+        }
+    }
+    &-button--avatar {
+        width: 37px;
+        margin-right: 16px;
+    }
+}
+.avatar{
+    border-radius: 50%;
+}

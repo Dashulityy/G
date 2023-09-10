@@ -1,0 +1,33 @@
+.c-user-stories{
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.avatar {
+    border: solid 2px #A6328D;
+    border-radius: 50%;
+    width: 92px;
+    height: 92px;
+    margin-bottom: 6px;
+    &:hover {
+        border: solid 2px transparent;
+        transition: .3s;
+    }
+}
+  
+.img{
+    width: 80px;
+    border-radius: 50%;
+    box-sizing: content-box;
+    border: solid 4px transparent;
+}
+
+.username{
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+}
