@@ -33,14 +33,13 @@
                   Repositories
                 </div>
                 <div class="rightBlock__count">
-                  {{ starred.length }}
+                {{ user.public_repos }}
                 </div>
               </div>
               <ul class="post-list">
                 <li class="post__item" v-for="item in starred" :key="item.id">
                   <post
-                  :data="getData(item)"
-                  />
+                  :data="getData(item)"/>
                 </li>
               </ul>
             </div>
@@ -64,12 +63,6 @@ export default {
     logo,
     profile
   },
-  computed: {
-    ...mapState({
-      starred: (state) => state.starred.data,
-      user: (state) => state.user.data
-    })
-  },
   methods: {
     ...mapActions({
       fetchStarred: 'starred/fetchStarred',
@@ -88,6 +81,12 @@ export default {
         id: item.id
       }
     }
+  },
+  computed: {
+    ...mapState({
+      starred: (state) => state.starred.data,
+      user: (state) => state.user.data
+    })
   },
   async created () {
     try {

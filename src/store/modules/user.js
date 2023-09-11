@@ -11,6 +11,9 @@ export default {
     },
     SET_FOLLOWING: (state, payload) => {
       state.data = payload
+    },
+    SET_REPOS: (state, payload) => {
+      state.data = payload
     }
   },
   actions: {
@@ -46,6 +49,26 @@ export default {
           }
         )
         commit('SET_FOLLOWING', data)
+        // this.$router.replace({ path: '/' })
+        console.log(data)
+      } catch (e) {
+        console.log(e)
+        // this.$router.replace({ path: '/auth' })
+        throw e
+      }
+    },
+    async getUserRepos ({ commit }) {
+      const token = localStorage.getItem('token')
+      try {
+        const { data } = await axios.get(
+          'https://api.github.com/user/repos',
+          {
+            headers: {
+              Authorization: `token ${token}`
+            }
+          }
+        )
+        commit('SET_REPOS', data)
         // this.$router.replace({ path: '/' })
         console.log(data)
       } catch (e) {
