@@ -1,10 +1,10 @@
 <template>
     <div class="c-users">
         <div class="users__avatar">
-            <img :src="data.avatar" alt="user avatar" class="users__img">
+            <img :src="avatar" alt="user avatar" class="users__img">
         </div>
         <div class="users__login">
-            {{ data.username }}
+            {{ username }}
         </div>
     </div>
 </template>

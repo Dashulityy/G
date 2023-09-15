@@ -1,9 +1,9 @@
 <template>
     <div class="c-card">
-        <div class="card__title">{{ data.title }}</div>
-        <div class="card__desc">{{ data.description  }}</div>
+        <div class="card__title">{{ title }}</div>
+        <div class="card__desc">{{ description }}</div>
         <div class="card__rating">
-          <rating :star="data.stars" :fork="data.forks"/>
+          <rating :star="stars" :fork="forks"/>
         </div>
     </div>
 </template>
@@ -13,17 +13,18 @@ import { rating } from '../rating'
 export default {
   name: 'card',
   props: {
-    cardTitle: {
+    title: {
       type: String,
       required: true,
       default: 'Vue.js'
     },
-    cardDescTitle: {
-      type: String,
-      required: true,
-      default: 'JavaScript '
+    stars: {
+      type: Number
     },
-    cardDesc: {
+    forks: {
+      type: Number
+    },
+    description: {
       type: String,
       required: true,
       default: 'framework for building interactive web applications ⚡'

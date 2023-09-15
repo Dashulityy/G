@@ -5,7 +5,7 @@
                 <button class="logo" @click="$router.push('/')">
                     <icon name="logo"/>
                 </button>
-                <button class="close-btn"  @click="logout">
+                <button class="close-btn"  @click="$router.push('/')">
                     <icon name="exit" />
                 </button>
             </div>
@@ -28,10 +28,6 @@ export default {
   methods: {
     goToFeeds () {
       this.$router.push('/')
-    },
-    logout () {
-      localStorage.removeItem('token')
-      window.location.reload()
     }
   }
 }

@@ -1,18 +1,17 @@
 <template>
-    <div class="c-feed">
-        <toggler @onToggle="toggle"/>
-        <div class="comments" v-if="shown">
-            <ul class="comments-list">
-                <li class="comments__item" v-for="issue in issues" :key="issue.id">
-                    <comment
-                    :username="issue.user.login"
-                    :text="issue.title"
-                    />
-                </li>
-            </ul>
-        </div>
-        <div class="date">{{ PostDate }}</div>
+  <div class="c-feed">
+    <div class="toggler">
+      <toggler @onToggle="toggle" />
     </div>
+    <div class="comments" v-if="shown">
+      <ul class="comments-list">
+        <li class="comments__item" v-for="issue in issues" :key="issue.id">
+          <comment :username="issue.user.login" :text="issue.title" />
+        </li>
+      </ul>
+    </div>
+    <div class="date">{{ PostDate }}</div>
+  </div>
 </template>
 
 <script>
@@ -36,10 +35,12 @@ export default {
     date: {
       type: Date
     },
-    data: {
-      type: Object,
-      required: true,
-      default: () => ({})
+    loading: {
+      type: Boolean
+    },
+    issues: {
+      type: Array,
+      default: () => []
     }
   },
   methods: {

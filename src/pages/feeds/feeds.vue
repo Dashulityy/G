@@ -22,10 +22,8 @@
   </div>
   <div class="container">
     <ul class="post-list">
-      <li class="post__item" v-for="item in starred" :key="item.id">
+      <li class="post__item">
         <post
-        :data="getData(item)"
-        :issues="item.issues?.data"
         />
       </li>
     </ul>
@@ -71,19 +69,6 @@ export default {
       fetchStarred: 'starred/fetchStarred',
       getUser: 'user/getUser'
     }),
-    getData (item) {
-      return {
-        username: item.owner.login,
-        title: item.name,
-        description: item.description,
-        stars: item.stargazers_count,
-        forks: item.forks,
-        avatar: item.owner.avatar_url,
-        issues: item.data,
-        date: new Date(item.created_at),
-        id: item.id
-      }
-    },
     getStoryData (obj) {
       return {
         id: obj.id,

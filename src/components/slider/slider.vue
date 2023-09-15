@@ -76,7 +76,6 @@ export default {
         owner,
         name
       } = this.trendings[this.slideNdx]
-      debugger
       await this.fetchReadme({
         id,
         owner: owner.login,

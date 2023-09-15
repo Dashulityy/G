@@ -37,9 +37,8 @@
                 </div>
               </div>
               <ul class="post-list">
-                <li class="post__item" v-for="item in starred" :key="item.id">
-                  <post
-                  :data="getData(item)"/>
+                <li class="post__item" v-for="item in repos" :key="item.id">
+                  <postRepos :data="getData(item)"/>
                 </li>
               </ul>
             </div>
@@ -49,51 +48,92 @@
 
 <script>
 import { headerNav } from '@/components/headerNav'
-import { post } from '@/components/post'
 import { topline } from '../../components/topline'
 import { logo } from '../../icons/variants'
-import { mapState, mapActions } from 'vuex'
+// import { mapState, mapActions } from 'vuex'
 import { profile } from '../../components/userProfile'
+import { postRepos } from '../../components/postRepos'
+// export default {
+//   name: 'repos',
+//   components: {
+//     headerNav,
+//     topline,
+//     logo,
+//     profile,
+//     postRepos
+//   },
+//   methods: {
+//     ...mapActions({
+//       fetchRepos: 'repos/fetchRepos',
+//       getUser: 'user/getUser'
+//     }),
+//     getData (item) {
+//       return {
+//         username: item.owner.login,
+//         title: item.name,
+//         description: item.description,
+//         stars: item.stargazers_count,
+//         forks: item.forks,
+//         avatar: item.owner.avatar_url,
+//         issues: item.data,
+//         repos: item.name,
+//         date: new Date(item.created_at),
+//         id: item.id
+//       }
+//     }
+//   },
+//   computed: {
+//     ...mapState({
+//       repos: (state) => state.repos.data,
+//       user: (state) => state.user.data
+//     })
+//   },
+//   async created () {
+//     try {
+//       await this.fetchRepos()
+//       await this.getUser()
+//     } catch (e) {
+//       console.log(e)
+//     }
+//   }
+// }
+import { useStore } from 'vuex'
+import { computed, onMounted } from 'vue'
 export default {
-  name: 'repos',
   components: {
     headerNav,
-    post,
     topline,
     logo,
-    profile
+    profile,
+    postRepos
   },
-  methods: {
-    ...mapActions({
-      fetchStarred: 'starred/fetchStarred',
-      getUser: 'user/getUser'
-    }),
-    getData (item) {
-      return {
-        username: item.owner.login,
-        title: item.name,
-        description: item.description,
-        stars: item.stargazers_count,
-        forks: item.forks,
-        avatar: item.owner.avatar_url,
-        issues: item.data,
-        date: new Date(item.created_at),
-        id: item.id
+  setup () {
+    const { dispatch, state } = useStore()
+    onMounted(() => {
+      try {
+        dispatch('repos/fetchRepos')
+        dispatch('user/getUser')
+      } catch (e) {
+        console.log(e)
       }
-    }
-  },
-  computed: {
-    ...mapState({
-      starred: (state) => state.starred.data,
-      user: (state) => state.user.data
     })
-  },
-  async created () {
-    try {
-      await this.fetchStarred()
-      await this.getUser()
-    } catch (e) {
-      console.log(e)
+    return {
+      repos: computed(() => state.repos.data),
+      user: computed(() => state.user.data),
+      getData (item) {
+        return {
+          username: item.owner.login,
+          title: item.name,
+          description: item.description,
+          stars: item.stargazers_count,
+          forks: item.forks,
+          avatar: item.owner.avatar_url,
+          issues: item.data,
+          repos: item.name,
+          date: new Date(item.created_at),
+          id: item.id
+        }
+      }
     }
   }
 }

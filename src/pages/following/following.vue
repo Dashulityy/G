@@ -55,35 +55,61 @@ import { headerNav } from '@/components/headerNav'
 import { following } from '@/components/userFollowing'
 import { topline } from '../../components/topline'
 import { logo } from '../../icons/variants'
-import { mapState, mapActions } from 'vuex'
+// import { mapState, mapActions } from 'vuex'
 import { profile } from '../../components/userProfile'
+// export default {
+//   name: 'repos',
+//   components: {
+//     headerNav,
+//     following,
+//     topline,
+//     logo,
+//     profile
+//   },
+//   computed: {
+//     ...mapState({
+//       user: (state) => state.user.data,
+//       followings: (state) => state.followings.data
+//     })
+//   },
+//   methods: {
+//     ...mapActions({
+//       getUserFollowing: 'followings/getUserFollowing',
+//       getUser: 'user/getUser'
+//     })
+//   },
+//   async created () {
+//     try {
+//       await this.getUserFollowing()
+//       await this.getUser()
+//     } catch (e) {
+//       console.log(e)
+//     }
+//   }
+// }
+import { useStore } from 'vuex'
+import { computed, onMounted } from 'vue'
 export default {
-  name: 'repos',
   components: {
     headerNav,
-    following,
     topline,
     logo,
-    profile
+    profile,
+    following
   },
-  computed: {
-    ...mapState({
-      user: (state) => state.user.data,
-      followings: (state) => state.followings.data
+  setup () {
+    const { dispatch, state } = useStore()
+    onMounted(() => {
+      try {
+        dispatch('followings/getUserFollowing')
+        dispatch('user/getUser')
+      } catch (e) {
+        console.log(e)
+      }
     })
-  },
-  methods: {
-    ...mapActions({
-      getUserFollowing: 'followings/getUserFollowing',
-      getUser: 'user/getUser'
-    })
-  },
-  async created () {
-    try {
-      await this.getUserFollowing()
-      await this.getUser()
-    } catch (e) {
-      console.log(e)
+    return {
+      user: computed(() => state.user.data),
+      followings: computed(() => state.followings.data)
     }
   }
 }

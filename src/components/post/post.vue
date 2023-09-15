@@ -1,14 +1,16 @@
 <template>
-    <div class="c-post">
+    <div class="c-post" v-for="item in starred" :key="item.id">
         <div class="post__user">
-            <usersPost :data="data"/>
+            <usersPost v-bind="getData(item)"/>
         </div>
         <div class="post__card">
-            <card :data="data"/>
+            <card v-bind="getData(item)"/>
         </div>
         <div class="comments">
             <feed
-            :date="data.date"
+            :issues="item.issues?.data"
+            :loading="item.issues?.loading"
+            :date="new Date(item.created_at)"
             @loadContent="loadIssues({ id: item.id, owner: item.owner.login, repo: item.name })"
             />
         </div>
@@ -28,15 +30,14 @@ export default {
     feed,
     card
   },
-  props: {
-    data: {
-      type: Object,
-      required: true,
-      default: () => ({})
+  data () {
+    return {
+      items: {}
     }
   },
   methods: {
     ...mapActions({
+      fetchStarred: 'starred/fetchStarred',
       fetchIssues: 'starred/fetchIssuesForRepo'
     }),
     loadIssues ({ id, owner, repo }) {

@@ -29,11 +29,11 @@ export default {
           }
         )
         commit('SET_USER', data)
-        this.$router.replace({ path: '/' })
+        // this.$router.replace({ path: '/' })
         console.log(data)
       } catch (e) {
         console.log(e)
-        this.$router.replace({ path: '/auth' })
+        // this.$router.replace({ path: '/auth' })
         throw e
       }
     },
@@ -49,11 +49,9 @@ export default {
           }
         )
         commit('SET_FOLLOWING', data)
-        // this.$router.replace({ path: '/' })
         console.log(data)
       } catch (e) {
         console.log(e)
-        // this.$router.replace({ path: '/auth' })
         throw e
       }
     },
@@ -69,11 +67,9 @@ export default {
           }
         )
         commit('SET_REPOS', data)
-        // this.$router.replace({ path: '/' })
         console.log(data)
       } catch (e) {
         console.log(e)
-        // this.$router.replace({ path: '/auth' })
         throw e
       }
     }

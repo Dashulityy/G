@@ -29,8 +29,7 @@
 import { icon } from '../../icons'
 import { button as xbutton } from '../../components/button'
 import axios from 'axios'
-const clientId = '4b36cb8352bfaaa052a7'
-const clientSecret = '8258d368b41d408b8e1bef9e6c4d207c9107f1c2'
+import env from '../../../env'
 export default {
   name: 'auth',
   components: {
@@ -41,7 +40,7 @@ export default {
     async getAuth () {
       const apiUrl = 'https://github.com/login/oauth/authorize'
       const params = new URLSearchParams()
-      params.append('client_id', clientId)
+      params.append('client_id', env.clientId)
       params.append('scope', 'repo:status read:user')
 
       window.location.href = `${apiUrl}?${params}`
@@ -53,7 +52,7 @@ export default {
       try {
         const response = await axios.post(
           'https://webdev-api.loftschool.com/github',
-          { clientId, clientSecret, code }
+          { clientId: env.clientId, clientSecret: env.clientSecret, code }
         )
         const token = response.data.token
         localStorage.setItem('token', token)
